@@ -12,6 +12,7 @@ async function auth(req, res, next) {
         }
         // const user = veriifyToken(token.slice(7));
         const user = veriifyToken(token)
+        // console.log(user);
 
         // masukkan data user kedalam req user yang mana nantika akan di tanggkap function selanjutnya
         req.user = user;
