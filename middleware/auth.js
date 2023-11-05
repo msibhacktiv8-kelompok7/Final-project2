@@ -18,10 +18,11 @@ async function auth(req, res, next) {
         req.user = user;
         next();
     } catch (error) {
-        if (error.message.includes('invalid')) {
+        if (error.name == 'JsonWebTokenError') {
+            console.error("Error :", error.message);
             return res.status(400).json("Token Tidak Valid");
         }
-        console.log(error.message);
+        console.error("Error :", error.message);
         return res.status(500).json("Internal Server error");
     }
 }
