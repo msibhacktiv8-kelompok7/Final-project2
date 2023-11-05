@@ -4,9 +4,20 @@ class UserController {
     static async createUser(req, res) {
         try {
             const dataUser = req.body;
-            const newUser = await User.create(dataUser);
-            delete newUser.password;
-            return res.status(200).json(newUser);
+            const { id, email, username, full_name, profile_image_url, age, phone_number, createdAt, updatedAt } = await User.create(dataUser);
+            return res.status(200).json({
+                User: {
+                    id,
+                    email,
+                    username,
+                    full_name,
+                    profile_image_url,
+                    age,
+                    phone_number,
+                    createdAt,
+                    updatedAt
+                }
+            });
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
                 return res.status(400).json({ message: err.errors[0].message });
