@@ -113,6 +113,45 @@ class UserController {
 
 
     }
+
+    static async delete(req, res) {
+        try {
+            const user = req.user;
+            const userId = req.params.userId;
+            // check apakah user yagn sekarang sedang login sama dengan param yang di kirim user
+            if (user.id != userId) {
+                throw {
+                    code: 401,
+                    message: 'Anda tidak bisa menghapus User ini'
+                };
+            }
+
+            const deleteUser = await User.destroy({
+                where: {
+                    id: userId
+                },
+                returning: true
+            });
+
+            if (deleteUser === 0) {
+                throw {
+                    code: 400,
+                    message: "Gagal Hapus user"
+                };
+            }
+            return res.status(200).json({
+                message: "User berhasil dihapus"
+            });
+        } catch (err) {
+            if (err.code) {
+                return res.status(err.code).json({ message: err.message });
+            }
+            console.log(err);
+            return res.status(500).json({ message: "Internar server error" });
+        }
+
+
+    }
 }
 
 
