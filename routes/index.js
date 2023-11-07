@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const usersRoute = require('./users')
+const photoRoute = require('./photos')
 
 
 
@@ -10,7 +11,7 @@ router.get('/', (req, res)=>{
 // route users
 router.use('/users', usersRoute);
 // route photo
-// router.use('/photos', authentication,photoRoute);
+router.use('/photos', photoRoute);
 // handler route not found
 router.get('*', (req, res)=>{
   res.status(404).send('Cari apa Hayooo???');

@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, SMALLINT
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Photo extends Model {
@@ -11,17 +11,40 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.user)
+      Photo.belongsTo(models.User, { foreignKey: "UserId" });
     }
   }
   Photo.init({
-    title: DataTypes.STRING,
-    caption: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "title harus ada"
+        },
+        notEmpty: {
+          msg: 'title harus diisi'
+        }
+      }
+    },
+    caption: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "captionya harus ada"
+        },
+        notEmpty: {
+          msg: 'caption harus diisi'
+        }
+      }
+    },
     poster_img_url: {
       type: DataTypes.STRING,
-      validate:{
+      allowNull: false,
+      validate: {
         notNull: {
-          msg: "username tidak boleh kosong"
+          msg: "link image tidak boleh kosong"
         },
         isUrl: {
           msg: "Format Url tidak valid"
