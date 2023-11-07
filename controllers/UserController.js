@@ -1,5 +1,4 @@
-const { Op } = require("sequelize");
-const { User } = require("../models");
+const { User, Photo } = require("../models");
 const { deleteKey, generateToken, hashPassword, comparePassword } = require("../utils");
 
 class UserController {
