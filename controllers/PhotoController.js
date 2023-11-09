@@ -1,4 +1,5 @@
-const {Photo, User} = require("../models");
+const { Photo, User } = require("../models");
+const removeKeyInObject = require("../utils/removeKeyInObject");
 
 class PhotoController {
     // post photo
@@ -22,8 +23,79 @@ class PhotoController {
         }
     }
     // get photo
+    static async getphoto(req, res) {
+        try {
+            const user = req.user;
+            const getPhoto = await Photo.findAll({
+                where: {
+                    UserId: user.id
+                },
+                include: [
+                    {
+                        model: User,
+                        attributes: [
+                            'id',
+                            'username',
+                            'profile_image_url'
+                        ]
+                    }
+                ],
+            });
+            res.status(200).json((getPhoto));
+        } catch (err) {
+            if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
+                return res.status(400).json({ message: err.errors[0].message });
+            }
+            console.log(err);
+            return res.status(500).json({ message: "Internal Servel Error" });
+        }
+    }
     // Update photo
+    static async updatePhoto(req, res) {
+        try {
+            const user = req.user;
+            const photoId = req.params.photoId;
+            const newPhoto = req.body;
+            const currentDate = new Date();
+           
+            if (JSON.stringify(newPhoto) === "{}") {
+                return res.status(400).json({
+                    message: "Data yang anda masukkan kosong"
+                })
+            }
+
+            const oldPhoto = await Photo.findOne({
+                where: {
+                    id: photoId,
+                    UserId: user.id
+                }
+            });
+
+            
+            const photoUpdate = await Photo.update(
+                {
+                    title: newPhoto.title || oldPhoto.title,
+                    caption: newPhoto.caption || oldPhoto.caption,
+                    poster_image_url: newPhoto.poster_image_url || oldPhoto.poster_image_url,
+                    updatedAt: currentDate
+                }, {
+                where: {
+                    id: photoId
+                },
+                returning: true
+            }
+            );
+            
+            return res.status(200).json({
+                Photo: photoUpdate[1][0]
+            });
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json("error");
+        }
+    }
     // Delete photo
 }
 
 module.exports = PhotoController;
+
