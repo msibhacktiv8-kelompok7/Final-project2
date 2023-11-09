@@ -139,7 +139,7 @@ class UserController {
                 };
             }
             return res.status(200).json({
-                message: "User berhasil dihapus"
+                message: "Your Account has been successfully deleted"
             });
         } catch (err) {
             if (err.code) {
