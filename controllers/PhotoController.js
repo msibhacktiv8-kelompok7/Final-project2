@@ -57,11 +57,11 @@ class PhotoController {
             const photoId = req.params.photoId;
             const newPhoto = req.body;
             const currentDate = new Date();
-           
+
             if (JSON.stringify(newPhoto) === "{}") {
                 return res.status(400).json({
                     message: "Data yang anda masukkan kosong"
-                })
+                });
             }
 
             const oldPhoto = await Photo.findOne({
@@ -71,7 +71,7 @@ class PhotoController {
                 }
             });
 
-            
+
             const photoUpdate = await Photo.update(
                 {
                     title: newPhoto.title || oldPhoto.title,
@@ -85,7 +85,7 @@ class PhotoController {
                 returning: true
             }
             );
-            
+
             return res.status(200).json({
                 Photo: photoUpdate[1][0]
             });
@@ -95,6 +95,50 @@ class PhotoController {
         }
     }
     // Delete photo
+    static async daletePhoto(req, res) {
+        try {
+            const user = req.user;
+            const photoId = req.params.photoId;
+            const photoInDb = await Photo.findOne({
+                where: {
+                    id: photoId,
+                    UserId: user.id
+                }
+            });
+
+
+
+            if (user.id !== photoInDb.UserId) {
+                throw {
+                    code: 401,
+                    message: 'Anda tidak bisa menghapus Photo ini'
+                };
+            }
+
+            const deletePhoto = await Photo.destroy({
+                where: {
+                    id: photoId
+                },
+                returning: true
+            });
+
+            if (deletePhoto === 0) {
+                throw {
+                    code: 400,
+                    message: "Gagal Hapus Photo"
+                };
+            }
+            return res.status(200).json({
+                message:  "Your Photo has been successfully deleted"
+            });
+        } catch (err) {
+            if (err.code) {
+                return res.status(err.code).json({ message: err.message });
+            }
+            console.log(err);
+            return res.status(500).json({ message: "Internar server error" });
+        }
+    }
 }
 
 module.exports = PhotoController;
