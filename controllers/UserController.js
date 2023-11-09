@@ -1,5 +1,4 @@
-const { Op } = require("sequelize");
-const { User } = require("../models");
+const { User, Photo } = require("../models");
 const { deleteKey, generateToken, hashPassword, comparePassword } = require("../utils");
 
 class UserController {
@@ -140,7 +139,7 @@ class UserController {
                 };
             }
             return res.status(200).json({
-                message: "User berhasil dihapus"
+                message: "Your Account has been successfully deleted"
             });
         } catch (err) {
             if (err.code) {

@@ -6,6 +6,12 @@
  * @returns 
  */
 module.exports = function (key, object) {
+    if (typeof key === Array) {
+        for (const k in key) {
+           delete object[k]
+        }
+    }
     delete object[key];
+
     return object;
 };
