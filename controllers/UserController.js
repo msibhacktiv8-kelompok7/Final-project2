@@ -1,6 +1,8 @@
 const { User, Photo } = require("../models");
 const { deleteKey, generateToken, hashPassword, comparePassword } = require("../utils");
 
+
+
 class UserController {
     // register user
     static async register(req, res) {
@@ -75,7 +77,7 @@ class UserController {
                 newUser.password = hashPassword(newUser.password);
             }
 
-            // console.log(user, userId);
+            // console.log(user.id, userId);
 
             if (user.id != userId) {
                 throw {
@@ -88,7 +90,7 @@ class UserController {
                 email: newUser.email || user.email,
                 full_name: newUser.full_name || user.full_name,
                 username: newUser.username || user.username,
-                password: newUser.password || user.username,
+                password: newUser.password || user.password,
                 profile_image_url: newUser.profile_image_url || user.profile_image_url,
                 age: newUser.age || user.age,
                 phone_number: newUser.phone_number || user.phone_number
@@ -96,11 +98,27 @@ class UserController {
                 where: {
                     id: userId
                 },
-                returning: true
             });
 
+
+            if (userUpdated == 0) {
+                throw {
+                    code: 401,
+                    message: 'User tidak ditemukan'
+                };
+            }
+            
+            let userCurrent = await User.findOne({
+                where: {
+                    id: userId
+                },
+                attributes: {
+                    exclude: ["password"]
+                }
+            })
+
             return res.status(200).json({
-                user: userUpdated[1][0]
+                user: userCurrent
             });
         } catch (err) {
             if (err.code) {

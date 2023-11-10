@@ -85,6 +85,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     }
   }, {
+    scopes: {
+      withoutPassword: {
+        attributes: {
+          exclude: ['password']
+      }
+      }
+    },
     sequelize,
     modelName: 'User',
   });
