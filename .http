@@ -2,9 +2,9 @@ POST http://localhost:9000/users/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "email" : "aufal@test.com",
+    "email" : "aufa@test.com",
     "full_name" : "ini testsdfdf",
-    "username" : "aufal",
+    "username" : "auf",
     "password" : "rahasia",
     "profile_image_url" : "http://asdfasfsdf.bp/sdfgsdfg",
     "age" : 9,
@@ -17,5 +17,60 @@ Content-Type: application/json
 
 {
     "email" : "aufal@test.com",
-    "password" : "rahasdia"
+    "password" : "rahasia"
 }
+
+###
+PUT http://localhost:9000/users/update/30 HTTP/1.1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJhdWZhbCIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMDlUMTM6NDI6MDYuMTY2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMDlUMTM6NDI6MDYuMTY2WiIsImlhdCI6MTY5OTUzODk4N30.ADAWUyPkzYi8gipH1h7mGocukJiX3JqxMfMRTUlEJPI
+
+{
+    "full_name" : "Aufal marom upd=ated"
+}
+
+###
+
+DELETE  http://localhost:9000/users/delete/28 HTTP/1.1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzA2NX0.a93i-Phopf-GQWqGrGs4gk3tgEA_SSDbHhexv07Y_a4
+
+
+
+###
+POST http://localhost:9000/photos HTTP/1.1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJhdWZhbCIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMDlUMTM6NDI6MDYuMTY2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMDlUMTM6NDI6MDYuMTY2WiIsImlhdCI6MTY5OTUzODk4N30.ADAWUyPkzYi8gipH1h7mGocukJiX3JqxMfMRTUlEJPI
+
+{
+     "title" : "strdin",
+     "caption" : "stsdfdsfrg",
+     "poster_image_url" : "http://strin.com"
+    
+}
+
+
+###
+
+GET  http://localhost:9000/photos HTTP/1.1
+Content-Type: applicatio/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJhdWZhbCIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMDlUMTM6NDI6MDYuMTY2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMDlUMTM6NDI6MDYuMTY2WiIsImlhdCI6MTY5OTUzODk4N30.ADAWUyPkzYi8gipH1h7mGocukJiX3JqxMfMRTUlEJPI
+
+
+###
+
+PUT http://localhost:9000/photos/32 HTTP/1.1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJhdWZhbCIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMDlUMTM6NDI6MDYuMTY2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMDlUMTM6NDI6MDYuMTY2WiIsImlhdCI6MTY5OTUzODk4N30.ADAWUyPkzYi8gipH1h7mGocukJiX3JqxMfMRTUlEJPI
+
+{
+   "title" : "sudah update"
+}
+
+
+###
+
+
+DELETE http://localhost:9000/photos/23 HTTP/1.1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJhdWZhbCIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMDlUMTM6NDI6MDYuMTY2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMDlUMTM6NDI6MDYuMTY2WiIsImlhdCI6MTY5OTUzODk4N30.ADAWUyPkzYi8gipH1h7mGocukJiX3JqxMfMRTUlEJPI
