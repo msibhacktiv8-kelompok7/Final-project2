@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
-router.put('/update/:userId',auth,UserController.update)
-router.delete('/delete/:userId',auth,UserController.delete)
+router.put('/:userId',auth,UserController.update)
+router.delete('/:userId',auth,UserController.delete)
 
 module.exports = router;

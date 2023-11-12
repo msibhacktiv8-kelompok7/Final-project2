@@ -284,7 +284,8 @@
      }
      ```
      *Response (200 - ok)*
-      ```json
+     
+    ```json
      {
         "message" : "Your Photo has been successfully deleted"
      }
