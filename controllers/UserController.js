@@ -11,7 +11,8 @@ class UserController {
             dataUser.password = hashPassword(dataUser.password);
             const user = await User.create(dataUser);
             return res.status(200).json({
-                User: deleteKey('password', user.dataValues)
+                // User: deleteKey('password', user.dataValues)
+                User: user
             });
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {

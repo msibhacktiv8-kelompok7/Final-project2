@@ -1,4 +1,4 @@
-const { Photo, User } = require("../models");
+const { Photo, User, Comment } = require("../models");
 
 
 class PhotoController {
@@ -9,23 +9,17 @@ class PhotoController {
             const user = req.user;
             // ambil data yang dikirikan klien
             const photo = req.body;
+            photo.UserId = user.id
+
 
             // simpan data kedalam database
-            const savePhoto = await Photo.create({
-                title: photo.title,
-                caption: photo.caption,
-                poster_img_url: photo.poster_image_url,
-                UserId: user.id
-            },{
-                include: ["user"]
-            }
-            );
+            const savePhoto = await Photo.create(photo);
             res.status(200).json(savePhoto);
             // tmapilkan response
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
-                return res.status(400).json({ message: err.errors[0].message  });
-            } else if (err.name === "SequelizeForeignKeyConstraintError"){
+                return res.status(400).json({ message: err.errors[0].message });
+            } else if (err.name === "SequelizeForeignKeyConstraintError") {
                 console.log(err.message);
                 return res.status(400).json({ message: "User id anda tidak ditemukan" });
             }
@@ -38,19 +32,29 @@ class PhotoController {
         try {
             const user = req.user;
             const getPhoto = await Photo.findAll({
-                where: {
-                    UserId: user.id
-                },
                 include: [{
                     model: User,
-                    as:"user",
                     attributes: [
                         'id',
                         'username',
                         'profile_image_url'
                     ]
-                } ],
-                
+                }, {
+
+                    model: Comment,
+                    attributes: [
+                        'comment',
+                    ],
+                    include: {
+                        model: User,
+                        attributes: [
+                            'username'
+                        ]
+                    }
+
+                }],
+               
+
             });
             res.status(200).json((getPhoto));
         } catch (err) {
@@ -82,11 +86,11 @@ class PhotoController {
                 }
             });
 
-           if (oldPhoto === null) {
-            return res.status(400).json({
-                message: "Photo Tidak ditemukan"
-            });
-           }
+            if (oldPhoto === null) {
+                return res.status(400).json({
+                    message: "Photo Tidak ditemukan"
+                });
+            }
 
 
             const photoUpdate = await Photo.update(
@@ -128,8 +132,8 @@ class PhotoController {
                 return res.status(400).json({
                     message: "Photo Tidak ditemukan"
                 });
-               }
-            
+            }
+
 
             if (user.id !== photoInDb.UserId) {
                 throw {
@@ -152,7 +156,7 @@ class PhotoController {
                 };
             }
             return res.status(200).json({
-                message:  "Your Photo has been successfully deleted"
+                message: "Your Photo has been successfully deleted"
             });
         } catch (err) {
             if (err.code) {
