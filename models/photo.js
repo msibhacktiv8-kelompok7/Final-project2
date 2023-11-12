@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    poster_img_url: {
+    poster_image_url: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {

@@ -15,7 +15,7 @@ module.exports = {
       caption: {
         type: Sequelize.STRING
       },
-      poster_img_url: {
+      poster_image_url: {
         type: Sequelize.STRING
       },
       UserId: {
