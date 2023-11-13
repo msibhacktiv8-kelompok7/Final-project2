@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "-c*F46-12ccaAaf1c24c31B313DdAdDC",
     "database": "railway",
-    "host": "viaduct.proxy.rlwy.net",
+    "host": "viaduct.proxy.rlwy.net:23743",
     "port": "23743",
     "dialect": "postgres"
   },
@@ -18,7 +18,7 @@
     "username": "postgres",
     "password": "-c*F46-12ccaAaf1c24c31B313DdAdDC",
     "database": "railway",
-    "host": "viaduct.proxy.rlwy.net",
+    "host": "viaduct.proxy.rlwy.net:23743",
     "port": "23743",
     "dialect": "postgres"
   }
