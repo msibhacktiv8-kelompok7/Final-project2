@@ -6,6 +6,7 @@ module.exports = {
         "password": "-c*F46-12ccaAaf1c24c31B313DdAdDC",
         "database": "railway",
         "host": "viaduct.proxy.rlwy.net",
+        "port": "23743",
         "dialect": "postgres"
     },
     test: {
@@ -16,10 +17,11 @@ module.exports = {
         "dialect": "mysql"
     },
     production: {
-        "username": process.env.DB_USERNAME,
-        "password": process.env.DB_PASSWORD,
-        "database": process.env.DB_DATABASE,
-        "host": process.env.DB_HOST,
+        "username": "postgres",
+        "password": "-c*F46-12ccaAaf1c24c31B313DdAdDC",
+        "database": "railway",
+        "host": "viaduct.proxy.rlwy.net",
+        "port": "23743",
         "dialect": "postgres"
     }
 };
