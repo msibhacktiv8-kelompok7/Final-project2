@@ -1,20 +1,20 @@
-const { Photo, User, Comment } = require("../models");
+const { User, SosialMedia } = require("../models");
 
 
-class CommentController {
-    // post comment
-    static async postComment(req, res) {
+class SosialMediaController {
+    // post sosmed
+    static async postSosialMedia(req, res) {
         try {
             // check data user
             const user = req.user;
             // ambil data yang dikirikan klien
-            const comment = req.body;
-            comment.UserId = user.id
+            const sosmed = req.body;
+            sosmed.UserId = user.id
 
 
             // simpan data kedalam database
-            const saveComment = await Comment.create(comment);
-            res.status(200).json(saveComment);
+            const saveSosmed = await SosialMedia.create(sosmed);
+            res.status(200).json(saveSosmed);
             // tmapilkan response
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
@@ -27,11 +27,11 @@ class CommentController {
             return res.status(500).json({ message: "Internal Servel Error" });
         }
     }
-    // get comment
-    static async getComment(req, res) {
+    // get sosmed
+    static async getSosialMedia(req, res) {
         try {
             const user = req.user;
-            const getComment = await Comment.findAll({
+            const getSosmed = await SosialMedia.findAll({
                 include: [{
                     model: User,
                     attributes: [
@@ -43,7 +43,7 @@ class CommentController {
 
 
             });
-            res.status(200).json((getComment));
+            res.status(200).json((getSosmed));
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
                 return res.status(400).json({ message: err.errors[0].message });
@@ -53,94 +53,95 @@ class CommentController {
         }
     }
     // Update comment
-    static async updateComment(req, res) {
+    static async updateSosialMedia(req, res) {
         try {
             const user = req.user;
-            const commentId = req.params.commentId;
-            const newComment = req.body;
+            const socialMediaId = req.params.socialMediaId;
+            const newSosmed = req.body;
             const currentDate = new Date();
 
-            if (JSON.stringify(newComment) === "{}") {
+            if (JSON.stringify(newSosmed) === "{}") {
                 return res.status(400).json({
                     message: "Data yang anda masukkan kosong"
                 });
             }
 
-            const oldComment = await Comment.findOne({
+            const oldSosmed = await SosialMedia.findOne({
                 where: {
-                    id: commentId,
+                    id: socialMediaId,
                     UserId: user.id
                 }
             });
 
-            if (oldComment === null) {
+            if (oldSosmed === null) {
                 return res.status(400).json({
-                    message: "Comment Tidak ditemukan"
+                    message: "Sosial Media Tidak ditemukan"
                 });
             }
 
 
-            const commentUpdate = await Comment.update(
+            const sosmedUpdate = await SosialMedia.update(
                 {
-                    comment: newComment.comment || oldComment.comment,
+                    name: newSosmed.name || newSosmed.name,
+                    sosial_media_url: newSosmed.sosial_media_url || newSosmed.sosial_media_url,
                     updatedAt: currentDate
                 }, {
                 where: {
-                    id: commentId
+                    id: socialMediaId
                 },
                 returning: true
             }
             );
 
             return res.status(200).json({
-                comment: commentUpdate[1][0]
+                sosialmedia: sosmedUpdate[1][0]
             });
         } catch (err) {
             console.log(err);
             return res.status(500).json("error");
         }
     }
-    // Delete comment
-    static async deleteComment(req, res) {
+    // // Delete comment
+    static async deleteSosmed(req, res) {
         try {
             const user = req.user;
-            const commentId = req.params.commentId;
-            const commentInDb = await Comment.findOne({
+            const socialMediaId = req.params.socialMediaId;
+            const sosmedInDb = await SosialMedia.findOne({
                 where: {
-                    id: commentId,
+                    id: socialMediaId,
                     UserId: user.id
                 }
             });
 
-            if (commentInDb === null) {
+            if (sosmedInDb === null) {
                 return res.status(400).json({
-                    message: "Comment Tidak ditemukan"
+                    message: "Sosial Media Tidak ditemukan"
                 });
             }
 
 
-            if (user.id !== commentInDb.UserId) {
+            if (user.id !== sosmedInDb.UserId) {
                 throw {
                     code: 401,
                     message: 'Anda tidak bisa menghapus comment ini'
                 };
             }
 
-            const deleteComment = await Comment.destroy({
+            const deleteSosmed = await SosialMedia.destroy({
                 where: {
-                    id: commentId
+                    id: socialMediaId
                 },
                 returning: true
             });
 
-            if (deleteComment === 0) {
+            if (deleteSosmed === 0) {
                 throw {
                     code: 400,
                     message: "Gagal Hapus Comment"
                 };
             }
             return res.status(200).json({
-                message: "Your comment has been successfully deleted"
+                message: "Your Social Media has been successfully deleted"
             });
         } catch (err) {
             if (err.code) {
@@ -152,5 +153,5 @@ class CommentController {
     }
 }
 
-module.exports = CommentController;
+module.exports = SosialMediaController;
 
