@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "postgres",
+    "password": "-c*F46-12ccaAaf1c24c31B313DdAdDC",
+    "database": "railway",
+    "host": "viaduct.proxy.rlwy.net",
+    "port": "23743",
+    "dialect": "postgres"
   },
   "test": {
     "username": "root",
@@ -14,10 +15,11 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "postgres",
+    "password": "-c*F46-12ccaAaf1c24c31B313DdAdDC",
+    "database": "railway",
+    "host": "viaduct.proxy.rlwy.net",
+    "port": "23743",
+    "dialect": "postgres"
   }
 }
