@@ -5,7 +5,7 @@ module.exports = {
         "username": "postgres",
         "password": "-c*F46-12ccaAaf1c24c31B313DdAdDC",
         "database": "railway",
-        "host": "viaduct.proxy.rlwy.net:23743",
+        "host": "viaduct.proxy.rlwy.net:5432",
         "port": "23743",
         "dialect": "postgres"
     },
@@ -20,7 +20,7 @@ module.exports = {
         "username": "postgres",
         "password": "-c*F46-12ccaAaf1c24c31B313DdAdDC",
         "database": "railway",
-        "host": "viaduct.proxy.rlwy.net:23743",
+        "host": "viaduct.proxy.rlwy.net:5432",
         "port": "23743",
         "dialect": "postgres"
     }
