@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.Photo)
+      this.hasMany(models.Photo);
+      this.hasOne(models.Comment);
     }
   }
   User.init({
@@ -29,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: {
         msg: "email sudah terdaftar"
       },
-      allowNull:false,
+      allowNull: false,
       validate: {
         notNull: {
           msg: "email tidak boleh kosong"
@@ -85,6 +86,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     }
   }, {
+    hooks: {
+      afterCreate: (record) => {
+        delete record.dataValues.password;
+      },
+      afterUpdate: (record) => {
+        delete record.dataValues.password;
+      },
+    },
     sequelize,
     modelName: 'User',
   });

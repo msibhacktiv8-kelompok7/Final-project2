@@ -1,20 +1,20 @@
 const { Photo, User, Comment } = require("../models");
 
 
-class PhotoController {
-    // post photo
-    static async postPhoto(req, res) {
+class CommentController {
+    // post comment
+    static async postComment(req, res) {
         try {
             // check data user
             const user = req.user;
             // ambil data yang dikirikan klien
-            const photo = req.body;
-            photo.UserId = user.id
+            const comment = req.body;
+            comment.UserId = user.id
 
 
             // simpan data kedalam database
-            const savePhoto = await Photo.create(photo);
-            res.status(200).json(savePhoto);
+            const saveComment = await Comment.create(comment);
+            res.status(200).json(saveComment);
             // tmapilkan response
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
@@ -27,11 +27,11 @@ class PhotoController {
             return res.status(500).json({ message: "Internal Servel Error" });
         }
     }
-    // get photo
-    static async getphoto(req, res) {
+    // get comment
+    static async getComment(req, res) {
         try {
             const user = req.user;
-            const getPhoto = await Photo.findAll({
+            const getComment = await Comment.findAll({
                 include: [{
                     model: User,
                     attributes: [
@@ -39,24 +39,11 @@ class PhotoController {
                         'username',
                         'profile_image_url'
                     ]
-                }, {
+                },],
 
-                    model: Comment,
-                    attributes: [
-                        'comment',
-                    ],
-                    include: {
-                        model: User,
-                        attributes: [
-                            'username'
-                        ]
-                    }
-
-                }],
-               
 
             });
-            res.status(200).json((getPhoto));
+            res.status(200).json((getComment));
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
                 return res.status(400).json({ message: err.errors[0].message });
@@ -65,98 +52,95 @@ class PhotoController {
             return res.status(500).json({ message: "Internal Servel Error" });
         }
     }
-    // Update photo
-    static async updatePhoto(req, res) {
+    // Update comment
+    static async updateComment(req, res) {
         try {
             const user = req.user;
-            const photoId = req.params.photoId;
-            const newPhoto = req.body;
+            const commentId = req.params.commentId;
+            const newComment = req.body;
             const currentDate = new Date();
 
-            if (JSON.stringify(newPhoto) === "{}") {
+            if (JSON.stringify(newComment) === "{}") {
                 return res.status(400).json({
                     message: "Data yang anda masukkan kosong"
                 });
             }
 
-            const oldPhoto = await Photo.findOne({
+            const oldComment = await Comment.findOne({
                 where: {
-                    id: photoId,
+                    id: commentId,
                     UserId: user.id
                 }
             });
 
-            if (oldPhoto === null) {
+            if (oldComment === null) {
                 return res.status(400).json({
-                    message: "Photo Tidak ditemukan"
+                    message: "Comment Tidak ditemukan"
                 });
             }
 
 
-            const photoUpdate = await Photo.update(
+            const commentUpdate = await Comment.update(
                 {
-                    title: newPhoto.title || oldPhoto.title,
-                    caption: newPhoto.caption || oldPhoto.caption,
-                    poster_image_url: newPhoto.poster_image_url || oldPhoto.poster_image_url,
+                    comment: newComment.comment || oldComment.comment,
                     updatedAt: currentDate
                 }, {
                 where: {
-                    id: photoId
+                    id: commentId
                 },
                 returning: true
             }
             );
 
             return res.status(200).json({
-                Photo: photoUpdate[1][0]
+                comment: commentUpdate[1][0]
             });
         } catch (err) {
             console.log(err);
             return res.status(500).json("error");
         }
     }
-    // Delete photo
-    static async daletePhoto(req, res) {
+    // Delete comment
+    static async deleteComment(req, res) {
         try {
             const user = req.user;
-            console.log(user);
-            const photoId = req.params.photoId;
-            const photoInDb = await Photo.findOne({
+            const commentId = req.params.commentId;
+            const commentInDb = await Comment.findOne({
                 where: {
-                    id: photoId,
+                    id: commentId,
                     UserId: user.id
                 }
             });
 
-            if (photoInDb === null) {
+            if (commentInDb === null) {
                 return res.status(400).json({
-                    message: "Photo Tidak ditemukan"
+                    message: "Comment Tidak ditemukan"
                 });
             }
 
 
-            if (user.id !== photoInDb.UserId) {
+            if (user.id !== commentInDb.UserId) {
                 throw {
                     code: 401,
-                    message: 'Anda tidak bisa menghapus Photo ini'
+                    message: 'Anda tidak bisa menghapus comment ini'
                 };
             }
 
-            const deletePhoto = await Photo.destroy({
+            const deleteComment = await Comment.destroy({
                 where: {
-                    id: photoId
+                    id: commentId
                 },
                 returning: true
             });
 
-            if (deletePhoto === 0) {
+            if (deleteComment === 0) {
                 throw {
                     code: 400,
-                    message: "Gagal Hapus Photo"
+                    message: "Gagal Hapus Comment"
                 };
             }
             return res.status(200).json({
-                message: "Your Photo has been successfully deleted"
+                message: "Your comment has been successfully deleted"
             });
         } catch (err) {
             if (err.code) {
@@ -168,5 +152,5 @@ class PhotoController {
     }
 }
 
-module.exports = PhotoController;
+module.exports = CommentController;
 
