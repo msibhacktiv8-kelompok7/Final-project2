@@ -1,6 +1,8 @@
 # Final Project 2 - My Gram
 
 
+link railway : [my gram api](https://final-project2-production.up.railway.app/)
+
 **Deadline 17 November 2023, pukul 23:59 WIB**
 
 **Requirment:**
