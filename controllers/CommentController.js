@@ -9,8 +9,7 @@ class CommentController {
             const user = req.user;
             // ambil data yang dikirikan klien
             const comment = req.body;
-            comment.UserId = user.id
-
+            comment.UserId = user.id;
 
             // simpan data kedalam database
             const saveComment = await Comment.create(comment);
@@ -33,15 +32,22 @@ class CommentController {
             const user = req.user;
             const getComment = await Comment.findAll({
                 include: [{
+                    model: Photo,
+                    attributes: [
+                        "id",
+                        "title",
+                        "caption",
+                        "poster_image_url",
+                    ]
+                }, {
                     model: User,
                     attributes: [
-                        'id',
-                        'username',
-                        'profile_image_url'
+                        "id",
+                        "username",
+                        "profile_image_url",
+                        "phone_number"
                     ]
-                },],
-
-
+                }]
             });
             res.status(200).json((getComment));
         } catch (err) {
