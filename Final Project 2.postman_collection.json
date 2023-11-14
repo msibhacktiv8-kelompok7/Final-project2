@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\" : \"string\",\r\n    \"full_name\" : \"string\",\r\n    \"username\" : \"string\",\r\n    \"password\" : \"string(hash)\",\r\n    \"profile_image_url\" : \"string\",\r\n    \"age\" : \"number/integer\",\r\n    \"phone_number\" : \"string\"\r\n}",
+							"raw": "{\r\n    \"email\" : \"{{email}}\",\r\n    \"full_name\" : \"{{full_name}}\",\r\n    \"username\" : \"{{username}}\",\r\n    \"password\" : \"{{password}}\",\r\n    \"profile_image_url\" : \"{{profile_image_url}}\",\r\n    \"age\" : {{age}},\r\n    \"phone_number\" : \"{{phone_number}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,14 +24,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/users",
-							"protocol": "http",
+							"raw": "{{base_url}}users/register",
 							"host": [
-								"localhost"
+								"{{base_url}}users"
 							],
-							"port": "9000",
 							"path": [
-								"users"
+								"register"
 							]
 						}
 					},
@@ -44,7 +42,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\" : \"string\",\r\n    \"full_name\" : \"string\",\r\n    \"username\" : \"string\",\r\n    \"password\" : \"string(hash)\",\r\n    \"profile_image_url\" : \"string\",\r\n    \"age\" : \"number/integer\",\r\n    \"phone_number\" : \"string\"\r\n}",
+							"raw": "{\r\n    \"email\" : \"{{email}}\",\r\n    \"password\" : \"{{password}}\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -52,14 +50,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/users",
-							"protocol": "http",
+							"raw": "{{base_url}}users/login",
 							"host": [
-								"localhost"
+								"{{base_url}}users"
 							],
-							"port": "9000",
 							"path": [
-								"users"
+								"login"
 							]
 						}
 					},
@@ -72,13 +68,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYsImZ1bGxfbmFtZSI6ImF1ZmFsIG1hcm9tIiwiZW1haWwiOiJhdWZhbHV6dW1ha2lAZ21haWwuY29tIiwidXNlcm5hbWUiOiJhdWZhbDAyIiwicHJvZmlsZV9pbWFnZV91cmwiOiJodHRwOi8vaW1hZ2UuY29tLzEiLCJhZ2UiOjIxLCJwaG9uZV9udW1iZXIiOiIxMjM0NTY3ODg5IiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0xMlQwNToxNDozNy4zMjJaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0xMlQwNToxNDozNy4zMjJaIiwiaWF0IjoxNjk5NzY2MjE5fQ.OcLpWRJ-1dSKBWnRgwmvZjhOl4YS8AAugFbZOgg15pI",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZ1bGxfbmFtZSI6InVkaW4gZnVsbCBuYW1lIiwiZW1haWwiOiJpbmltYWlsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJ1ZGluIiwicHJvZmlsZV9pbWFnZV91cmwiOiJodHRwOi8vaW1hZ2UuY29tLzEiLCJhZ2UiOjIwLCJwaG9uZV9udW1iZXIiOiIrNjIxMjM0NTY3IiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwiaWF0IjoxNjk5OTcyOTM3fQ.tgpXyYxvW1YKAyAJezUvsjmzX6bcfvZ4ktOkN_VDQs8",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\" : \"aufal02 update\"\r\n}",
+							"raw": "{\r\n    \"username\" : \"{{username}} updated\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -86,15 +82,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/users/36",
-							"protocol": "http",
+							"raw": "{{base_url}}users/10",
 							"host": [
-								"localhost"
+								"{{base_url}}users"
 							],
-							"port": "9000",
 							"path": [
-								"users",
-								"36"
+								"10"
 							],
 							"query": [
 								{
@@ -114,20 +107,17 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYsImZ1bGxfbmFtZSI6ImF1ZmFsIG1hcm9tIiwiZW1haWwiOiJhdWZhbHV6dW1ha2lAZ21haWwuY29tIiwidXNlcm5hbWUiOiJhdWZhbDAyIiwicHJvZmlsZV9pbWFnZV91cmwiOiJodHRwOi8vaW1hZ2UuY29tLzEiLCJhZ2UiOjIxLCJwaG9uZV9udW1iZXIiOiIxMjM0NTY3ODg5IiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0xMlQwNToxNDozNy4zMjJaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0xMlQwNToxNDozNy4zMjJaIiwiaWF0IjoxNjk5NzY2MjE5fQ.OcLpWRJ-1dSKBWnRgwmvZjhOl4YS8AAugFbZOgg15pI",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZ1bGxfbmFtZSI6InVkaW4gZnVsbCBuYW1lIiwiZW1haWwiOiJpbmltYWlsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJ1ZGluIiwicHJvZmlsZV9pbWFnZV91cmwiOiJodHRwOi8vaW1hZ2UuY29tLzEiLCJhZ2UiOjIwLCJwaG9uZV9udW1iZXIiOiIrNjIxMjM0NTY3IiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwiaWF0IjoxNjk5OTcyOTM3fQ.tgpXyYxvW1YKAyAJezUvsjmzX6bcfvZ4ktOkN_VDQs8",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:9000/users/36",
-							"protocol": "http",
+							"raw": "{{base_url}}users/10",
 							"host": [
-								"localhost"
+								"{{base_url}}users"
 							],
-							"port": "9000",
 							"path": [
-								"users",
-								"36"
+								"10"
 							]
 						}
 					},
@@ -139,19 +129,19 @@
 			"name": "Photos",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "create photo",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImZ1bGxfbmFtZSI6ImF1ZmFsIG1hcm9tIiwiZW1haWwiOiJhdWZhbEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImF1ZmFsMDIiLCJwcm9maWxlX2ltYWdlX3VybCI6Imh0dHA6Ly9pbWFnZS5jb20vMSIsImFnZSI6MjEsInBob25lX251bWJlciI6IjEyMzQ1Njc4ODkiLCJjcmVhdGVkQXQiOiIyMDIzLTExLTEyVDA1OjIwOjUyLjgzMloiLCJ1cGRhdGVkQXQiOiIyMDIzLTExLTEyVDA1OjIwOjUyLjgzMloiLCJpYXQiOjE2OTk3NjY1MTN9.vhbMDEnhHL5sweMLr0kMVG2sjpC5hkrgecyyXBy2C_0",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZ1bGxfbmFtZSI6InVkaW4gZnVsbCBuYW1lIiwiZW1haWwiOiJpbmltYWlsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJ1ZGluIiwicHJvZmlsZV9pbWFnZV91cmwiOiJodHRwOi8vaW1hZ2UuY29tLzEiLCJhZ2UiOjIwLCJwaG9uZV9udW1iZXIiOiIrNjIxMjM0NTY3IiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwiaWF0IjoxNjk5OTcyOTM3fQ.tgpXyYxvW1YKAyAJezUvsjmzX6bcfvZ4ktOkN_VDQs8",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\" : \"ini foto saya\",\r\n    \"caption\" : \"hahahahah ini punya saya\",\r\n    \"poster_image_url\" : \"http://image.com/1234\"\r\n}",
+							"raw": "{\r\n    \"title\" : \"ini foto udin\",\r\n    \"caption\" : \"udin ganteng\",\r\n    \"poster_image_url\" : \"http://image.com/1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,14 +149,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/photos",
-							"protocol": "http",
+							"raw": "{{base_url}}photos",
 							"host": [
-								"localhost"
-							],
-							"port": "9000",
-							"path": [
-								"photos"
+								"{{base_url}}photos"
 							]
 						}
 					},
@@ -176,7 +161,19 @@
 					"name": "get photos",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZ1bGxfbmFtZSI6InVkaW4gZnVsbCBuYW1lIiwiZW1haWwiOiJpbmltYWlsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJ1ZGluIiwicHJvZmlsZV9pbWFnZV91cmwiOiJodHRwOi8vaW1hZ2UuY29tLzEiLCJhZ2UiOjIwLCJwaG9uZV9udW1iZXIiOiIrNjIxMjM0NTY3IiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwiaWF0IjoxNjk5OTcyOTM3fQ.tgpXyYxvW1YKAyAJezUvsjmzX6bcfvZ4ktOkN_VDQs8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}photos",
+							"host": [
+								"{{base_url}}photos"
+							]
+						}
 					},
 					"response": []
 				},
@@ -187,7 +184,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImZ1bGxfbmFtZSI6ImF1ZmFsIG1hcm9tIiwiZW1haWwiOiJhdWZhbEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImF1ZmFsMDIiLCJwcm9maWxlX2ltYWdlX3VybCI6Imh0dHA6Ly9pbWFnZS5jb20vMSIsImFnZSI6MjEsInBob25lX251bWJlciI6IjEyMzQ1Njc4ODkiLCJjcmVhdGVkQXQiOiIyMDIzLTExLTEyVDA1OjIwOjUyLjgzMloiLCJ1cGRhdGVkQXQiOiIyMDIzLTExLTEyVDA1OjIwOjUyLjgzMloiLCJpYXQiOjE2OTk3NjY1MTN9.vhbMDEnhHL5sweMLr0kMVG2sjpC5hkrgecyyXBy2C_0",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZ1bGxfbmFtZSI6InVkaW4gZnVsbCBuYW1lIiwiZW1haWwiOiJpbmltYWlsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJ1ZGluIiwicHJvZmlsZV9pbWFnZV91cmwiOiJodHRwOi8vaW1hZ2UuY29tLzEiLCJhZ2UiOjIwLCJwaG9uZV9udW1iZXIiOiIrNjIxMjM0NTY3IiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwiaWF0IjoxNjk5OTcyOTM3fQ.tgpXyYxvW1YKAyAJezUvsjmzX6bcfvZ4ktOkN_VDQs8",
 								"type": "text"
 							}
 						],
@@ -201,15 +198,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/photos/34",
-							"protocol": "http",
+							"raw": "{{base_url}}photos/{{photoId}}",
 							"host": [
-								"localhost"
+								"{{base_url}}photos"
 							],
-							"port": "9000",
 							"path": [
-								"photos",
-								"34"
+								"{{photoId}}"
 							]
 						}
 					},
@@ -222,13 +216,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImZ1bGxfbmFtZSI6ImF1ZmFsIG1hcm9tIiwiZW1haWwiOiJhdWZhbEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImF1ZmFsMDIiLCJwcm9maWxlX2ltYWdlX3VybCI6Imh0dHA6Ly9pbWFnZS5jb20vMSIsImFnZSI6MjEsInBob25lX251bWJlciI6IjEyMzQ1Njc4ODkiLCJjcmVhdGVkQXQiOiIyMDIzLTExLTEyVDA1OjIwOjUyLjgzMloiLCJ1cGRhdGVkQXQiOiIyMDIzLTExLTEyVDA1OjIwOjUyLjgzMloiLCJpYXQiOjE2OTk3NjY1MTN9.vhbMDEnhHL5sweMLr0kMVG2sjpC5hkrgecyyXBy2C_0",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZ1bGxfbmFtZSI6InVkaW4gZnVsbCBuYW1lIiwiZW1haWwiOiJpbmltYWlsQHRlc3QuY29tIiwidXNlcm5hbWUiOiJ1ZGluIiwicHJvZmlsZV9pbWFnZV91cmwiOiJodHRwOi8vaW1hZ2UuY29tLzEiLCJhZ2UiOjIwLCJwaG9uZV9udW1iZXIiOiIrNjIxMjM0NTY3IiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0xNFQxNDo0MDo1MC44NDNaIiwiaWF0IjoxNjk5OTcyOTM3fQ.tgpXyYxvW1YKAyAJezUvsjmzX6bcfvZ4ktOkN_VDQs8",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n     \"title\" : \"ini foto saya sudah diupdate\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -236,15 +230,262 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/photos/34",
-							"protocol": "http",
+							"raw": "{{base_url}}photos/{{photoId}}",
 							"host": [
-								"localhost"
+								"{{base_url}}photos"
 							],
-							"port": "9000",
 							"path": [
-								"photos",
-								"34"
+								"{{photoId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "create comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImF1ZiIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsImlhdCI6MTY5OTk2OTMxNH0.x56uLVSsYI6pFhrG6uHgwf30WMfOlHGPu1D1I1X-RBk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\" : \"saya ini lagi comment\",\r\n    \"PhotoId\" : {{photoId}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}comments",
+							"host": [
+								"{{base_url}}comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImF1ZiIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsImlhdCI6MTY5OTk2OTMxNH0.x56uLVSsYI6pFhrG6uHgwf30WMfOlHGPu1D1I1X-RBk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}comments",
+							"host": [
+								"{{base_url}}comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImF1ZiIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsImlhdCI6MTY5OTk2OTMxNH0.x56uLVSsYI6pFhrG6uHgwf30WMfOlHGPu1D1I1X-RBk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\" : \"ini commnet update\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}comment/{{commentId}}",
+							"host": [
+								"{{base_url}}comment"
+							],
+							"path": [
+								"{{commentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImF1ZiIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsImlhdCI6MTY5OTk2OTMxNH0.x56uLVSsYI6pFhrG6uHgwf30WMfOlHGPu1D1I1X-RBk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\" : 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}comment/{{commentId}}",
+							"host": [
+								"{{base_url}}comment"
+							],
+							"path": [
+								"{{commentId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sosial media",
+			"item": [
+				{
+					"name": "create sosmed",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImF1ZiIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsImlhdCI6MTY5OTk3MDg2NH0.h7J635lNMp1mAzT87A8S7NmkFER_O0QOvJTY86xpHAo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"instagram\",\r\n    \"sosial_media_url\" : \"http://sosialmedia.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}socilmedias",
+							"host": [
+								"{{base_url}}socilmedias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get sosmed",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImF1ZiIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsImlhdCI6MTY5OTk3MDg2NH0.h7J635lNMp1mAzT87A8S7NmkFER_O0QOvJTY86xpHAo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}socilmedias",
+							"host": [
+								"{{base_url}}socilmedias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImF1ZiIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsImlhdCI6MTY5OTk3MDg2NH0.h7J635lNMp1mAzT87A8S7NmkFER_O0QOvJTY86xpHAo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"facebook\",\r\n    \"sosial_media_url\" : \"http://facebook.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}socilmedias/{{sosialmediaid}}",
+							"host": [
+								"{{base_url}}socilmedias"
+							],
+							"path": [
+								"{{sosialmediaid}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgsImZ1bGxfbmFtZSI6ImluaSB0ZXN0c2RmZGYiLCJlbWFpbCI6ImF1ZmFAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImF1ZiIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiaHR0cDovL2FzZGZhc2ZzZGYuYnAvc2RmZ3NkZmciLCJhZ2UiOjksInBob25lX251bWJlciI6Ijk0Mzg1MzQ1ZHM3MzQ4NTc0MyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTRUMTM6MTY6MjkuODM2WiIsImlhdCI6MTY5OTk3MDg2NH0.h7J635lNMp1mAzT87A8S7NmkFER_O0QOvJTY86xpHAo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}socilmedias/{{sosialmediaid}}",
+							"host": [
+								"{{base_url}}socilmedias"
+							],
+							"path": [
+								"{{sosialmediaid}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},
