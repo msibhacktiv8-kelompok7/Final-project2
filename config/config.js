@@ -2,11 +2,10 @@ require('dotenv').config()
 
 module.exports = {
     development: {
-        "username": "postgres",
-        "password": "-c*F46-12ccaAaf1c24c31B313DdAdDC",
-        "database": "railway",
-        "host": "viaduct.proxy.rlwy.net:5432",
-        "port": "23743",
+        "username": process.env.PGUSER,
+        "password": process.env.PGPASSWORD,
+        "database": process.env.PGDATABASE,
+        "host": process.env.PGHOST,
         "dialect": "postgres"
     },
     test: {
@@ -17,11 +16,10 @@ module.exports = {
         "dialect": "mysql"
     },
     production: {
-        "username": "postgres",
-        "password": "-c*F46-12ccaAaf1c24c31B313DdAdDC",
-        "database": "railway",
-        "host": "viaduct.proxy.rlwy.net:5432",
-        "port": "23743",
+        "username": process.env.PGUSER,
+        "password": process.env.PGPASSWORD,
+        "database": process.env.PGDATABASE,
+        "host": process.env.PGHOST,
         "dialect": "postgres"
     }
 };
