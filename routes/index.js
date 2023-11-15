@@ -8,7 +8,7 @@ const sosialMediaRoute = require('./sosialmedia')
 
 
 router.get('/', (req, res) => {
-  res.send('Hello welcome to my Photo Album Api')
+  res.send('Hello welcome to my Gram Api')
 })
 // route users
 router.use('/users', usersRoute);
