@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start1": "nodemon ./bin/www",
     "start": "node ./bin/www",
-    "dev": "node --watch ./bin/www",
-    "migrate" : "npx sequelize db:migrate"
+    "dev": "nodemon ./bin/www",
+    "create" : "npx sequelize db:create",
+    "migrate" : "npx sequelize db:migrate",
+    "test" : ""
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
