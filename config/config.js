@@ -1,27 +1,28 @@
-require('dotenv').config()
+require('dotenv').config();
 
 module.exports = {
     development: {
-        "username": process.env.PGUSER,
-        "password": process.env.PGPASSWORD,
-        "database": process.env.PGDATABASE,
-        "host": process.env.PGHOST,
-        "port": process.env.PGPORT,
+        "username": process.env.DEV_PGUSER,
+        "password": process.env.DEV_PGPASSWORD,
+        "database": process.env.DEV_PGDATABASE,
+        "host": process.env.DEV_PGHOST,
+        "port": process.env.DEV_PGPORT,
         "dialect": "postgres"
     },
     test: {
-        "username": "root",
-        "password": null,
-        "database": "database_test",
-        "host": "127.0.0.1",
-        "dialect": "mysql"
+        "username": process.env.TEST_PGUSER,
+        "password": process.env.TEST_PGPASSWORD,
+        "database": process.env.TEST_PGDATABASE,
+        "host": process.env.TEST_PGHOST,
+        "port": process.env.TEST_PGPORT,
+        "dialect": "postgres"
     },
     production: {
-        "username": process.env.PGUSER,
-        "password": process.env.PGPASSWORD,
-        "database": process.env.PGDATABASE,
-        "host": process.env.PGHOST,
-        "port": process.env.PGPORT,
+        "username": process.env.PROD_PGUSER,
+        "password": process.env.PROD_PGPASSWORD,
+        "database": process.env.PROD_PGDATABASE,
+        "host": process.env.PROD_PGHOST,
+        "port": process.env.PROD_PGPORT,
         "dialect": "postgres"
     }
 };

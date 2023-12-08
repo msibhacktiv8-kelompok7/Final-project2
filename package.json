@@ -5,7 +5,8 @@
   "scripts": {
     "start1": "nodemon ./bin/www",
     "start": "node ./bin/www",
-    "dev": "node --watch ./bin/www"
+    "dev": "node --watch ./bin/www",
+    "migrate" : "npx sequelize db:migrate"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
