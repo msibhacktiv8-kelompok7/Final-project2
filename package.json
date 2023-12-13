@@ -7,7 +7,7 @@
     "dev": "nodemon ./bin/www",
     "create" : "npx sequelize db:create",
     "migrate" : "npx sequelize db:migrate",
-    "test" : ""
+    "test" : "jest"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
