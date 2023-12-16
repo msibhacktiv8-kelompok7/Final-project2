@@ -5,10 +5,10 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "create": "npx sequelize db:create",
+    "create": "npx sequelize db:create --env",
     "migrate": "npx sequelize db:migrate",
     "test": "npx jest --runInBand --detectOpenHandles --forceExit",
-    "db:create:test": "npx sequelize db:create",
+    "db:create:test": "npx sequelize db:create --env test",
     "db:migrate:test": "npx sequelize db:migrate",
     "test:singleUser": "jest test/user.test.js",
     "test:singleComment": "jest test/comment.test.js",

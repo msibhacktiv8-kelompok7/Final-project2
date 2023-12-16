@@ -17,3 +17,6 @@ npm run test:singlePhoto #untuk menjalankan photo test file
 npm run test:singleSosialMedia #untuk menjalankan sosial media test file
 
 ```
+
+# Result Unit Test Integration
+![alt text](http://url/to/img.png)
