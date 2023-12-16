@@ -5,9 +5,13 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "create" : "npx sequelize db:create",
-    "migrate" : "npx sequelize db:migrate",
-    "test" : ""
+    "create": "npx sequelize db:create",
+    "migrate": "npx sequelize db:migrate",
+    "test": "jest",
+    "test:singleUser": "jest test/user.test.js",
+    "test:singleComment": "jest test/comment.test.js",
+    "test:singlePhoto": "jest test/photo.test.js",
+    "test:singleSosialMedia": "jest test/socialmedia.test.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -20,7 +24,8 @@
     "morgan": "^1.9.1",
     "nodemon": "^3.0.1",
     "pg": "^8.11.3",
-    "sequelize": "^6.33.0"
+    "sequelize": "^6.33.0",
+    "supertest": "^6.3.3"
   },
   "devDependencies": {
     "jest": "^29.7.0",

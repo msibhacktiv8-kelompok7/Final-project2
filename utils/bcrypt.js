@@ -1,4 +1,7 @@
 const bcrypt = require("bcryptjs");
+require("dotenv").config()
+const jwt = require("jsonwebtoken")
+const SECRET_KEY = process.env.SECRET_KEY
 
 /**
  * 
@@ -22,5 +25,16 @@ function comparePassword(pass, passHashed) {
     return bcrypt.compareSync(pass, passHashed);
 }
 
+const createToken = (payload) => {
+    const token = jwt.sign(payload, SECRET_KEY)
+    return token
+}
 
-module.exports = {hashPassword, comparePassword}
+const verifyToken = (token) => {
+    const decoded = jwt.verify(token, SECRET_KEY)
+    return decoded
+}
+
+
+
+module.exports = { hashPassword, comparePassword, createToken, verifyToken }

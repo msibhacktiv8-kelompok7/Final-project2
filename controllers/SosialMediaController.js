@@ -11,14 +11,25 @@ class SosialMediaController {
             const sosmed = req.body;
             sosmed.UserId = user.id
 
+            console.log("FASDAD", sosmed.name)
+
+            if (sosmed.name === undefined) {
+                return res.status(400).json({ message: "Invalid or missing sosmed name" });
+            }
+
 
             // simpan data kedalam database
             const saveSosmed = await SosialMedia.create(sosmed);
-            res.status(200).json(saveSosmed);
+            res.status(201).json({
+                social_media: saveSosmed
+            });
             // tmapilkan response
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
-                return res.status(400).json({ message: err.errors[0].message });
+                return res.status(401).json({
+                    name: err.name,
+                    errors: err
+                });
             } else if (err.name === "SequelizeForeignKeyConstraintError") {
                 console.log(err.message);
                 return res.status(400).json({ message: "User id anda tidak ditemukan" });
@@ -43,7 +54,7 @@ class SosialMediaController {
 
 
             });
-            res.status(200).json((getSosmed));
+            res.status(200).json({ social_medias: getSosmed });
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
                 return res.status(400).json({ message: err.errors[0].message });
@@ -60,6 +71,12 @@ class SosialMediaController {
             const newSosmed = req.body;
             const currentDate = new Date();
 
+            if (!newSosmed.name || newSosmed.name.trim() === "") {
+                return res.status(400).json({
+                    message: "Invalid or missing fields for update"
+                });
+            }
+
             if (JSON.stringify(newSosmed) === "{}") {
                 return res.status(400).json({
                     message: "Data yang anda masukkan kosong"
@@ -74,7 +91,7 @@ class SosialMediaController {
             });
 
             if (oldSosmed === null) {
-                return res.status(400).json({
+                return res.status(404).json({
                     message: "Sosial Media Tidak ditemukan"
                 });
             }
@@ -94,7 +111,7 @@ class SosialMediaController {
             );
 
             return res.status(200).json({
-                sosialmedia: sosmedUpdate[1][0]
+                social_media: sosmedUpdate[1][0]
             });
         } catch (err) {
             console.log(err);
@@ -113,8 +130,10 @@ class SosialMediaController {
                 }
             });
 
+
+
             if (sosmedInDb === null) {
-                return res.status(400).json({
+                return res.status(404).json({
                     message: "Sosial Media Tidak ditemukan"
                 });
             }
@@ -134,12 +153,6 @@ class SosialMediaController {
                 returning: true
             });
 
-            if (deleteSosmed === 0) {
-                throw {
-                    code: 400,
-                    message: "Gagal Hapus Comment"
-                };
-            }
             return res.status(200).json({
                 message: "Your Social Media has been successfully deleted"
             });

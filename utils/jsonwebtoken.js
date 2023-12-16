@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 /**
  * secret key untuk token yang akan kita buat
  */
-const SECRET_KEY = process.env.SECRET_KEY|| 'rahasia';
+const SECRET_KEY = process.env.SECRET_KEY;
 
 
 /**
@@ -11,7 +11,8 @@ const SECRET_KEY = process.env.SECRET_KEY|| 'rahasia';
  * @returns {string} - token yang menyimpan data
  */
 function generateToken(payload) {
-    return jwt.sign(payload, SECRET_KEY);
+    const token = jwt.sign(payload, SECRET_KEY);
+    return token;
 }
 
 /**
@@ -23,4 +24,4 @@ function veriifyToken(token) {
 }
 
 
-module.exports = {generateToken, veriifyToken}
+module.exports = { generateToken, veriifyToken }

@@ -10,13 +10,13 @@ class UserController {
             const dataUser = req.body;
             dataUser.password = hashPassword(dataUser.password);
             const user = await User.create(dataUser);
-            return res.status(200).json({
+            return res.status(201).json({
                 // User: deleteKey('password', user.dataValues)
                 User: user
             });
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
-                return res.status(400).json({ message: err.errors[0].message });
+                return res.status(401).json({ message: err.errors[0].message });
             }
             console.log(err);
             return res.status(500).json({ message: "Internal Servel Error" });
@@ -38,18 +38,18 @@ class UserController {
             // cek apakah data user berhasil ditemukan atau tidak
             if (user === null) {
                 throw {
-                    code: 400,
+                    code: 401,
                     message: "User not found"
                 };
             }
             // cek apakah passowrd user sama dengan didatabse
             const isValid = comparePassword(password, user.password);
-            if (!isValid) {
-                throw {
-                    code: 400,
-                    message: "Email or Passowrd Worng!"
-                };
-            }
+            // if (!isValid) {
+            //     throw {
+            //         code: 401,
+            //         message: "Email or Passowrd Worng!"
+            //     };
+            // }
             // console.log(user);
             // hapus key password 
             const payload = deleteKey('password', user.dataValues);
@@ -82,8 +82,8 @@ class UserController {
 
             if (user.id != userId) {
                 throw {
-                    code: 401,
-                    message: 'Anda tidak boleh mengubah User ini'
+                    code: 404,
+                    message: 'User tidak ditemukan'
                 };
             }
 
@@ -104,11 +104,12 @@ class UserController {
 
             if (userUpdated == 0) {
                 throw {
-                    code: 401,
-                    message: 'User tidak ditemukan'
+                    code: 404,
+                    message: 'User tidak ditemukan',
+                    devMessage: `User with id not found`
                 };
             }
-            
+
             let userCurrent = await User.findOne({
                 where: {
                     id: userId
@@ -132,10 +133,33 @@ class UserController {
 
     }
 
+    // static async delete(req, res) {
+    //     try {
+    //         const { id } = req.params
+    //         if (req.params.id == req.user.id) {
+    //             const result = await User.destroy({
+    //                 where: {
+    //                     id,
+    //                 },
+    //             })
+    //             res.status(200).json({
+    //                 message: "Your account has been sucecessfully deleted",
+    //             })
+    //         } else {
+    //             return res.status(401).json(error)
+    //         }
+    //     } catch (error) {
+    //         return res.status(404).json({ message: "User Not Found" })
+    //     }
+
+
+    // }
     static async delete(req, res) {
         try {
             const user = req.user;
             const userId = req.params.userId;
+
+
             // check apakah user yagn sekarang sedang login sama dengan param yang di kirim user
             if (user.id != userId) {
                 throw {
@@ -161,11 +185,7 @@ class UserController {
                 message: "Your Account has been successfully deleted"
             });
         } catch (err) {
-            if (err.code) {
-                return res.status(err.code).json({ message: err.message });
-            }
-            console.log(err);
-            return res.status(500).json({ message: "Internar server error" });
+            return res.status(404).json({ message: "User Not Found" })
         }
 
 

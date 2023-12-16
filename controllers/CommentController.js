@@ -13,14 +13,14 @@ class CommentController {
 
             // simpan data kedalam database
             const saveComment = await Comment.create(comment);
-            res.status(200).json(saveComment);
+            res.status(201).json({ comments: saveComment });
             // tmapilkan response
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
                 return res.status(400).json({ message: err.errors[0].message });
             } else if (err.name === "SequelizeForeignKeyConstraintError") {
                 console.log(err.message);
-                return res.status(400).json({ message: "User id anda tidak ditemukan" });
+                return res.status(404).json({ message: "User id anda tidak ditemukan" });
             }
             console.log(err.name);
             return res.status(500).json({ message: "Internal Servel Error" });
@@ -49,7 +49,7 @@ class CommentController {
                     ]
                 }]
             });
-            res.status(200).json((getComment));
+            res.status(200).json(({ comments: getComment }));
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
                 return res.status(400).json({ message: err.errors[0].message });
@@ -63,11 +63,11 @@ class CommentController {
         try {
             const user = req.user;
             const commentId = req.params.commentId;
-            const newComment = req.body;
+            const newComment = req.body.comment;
             const currentDate = new Date();
 
-            if (JSON.stringify(newComment) === "{}") {
-                return res.status(400).json({
+            if (!newComment || newComment.trim() === "") {
+                return res.status(401).json({
                     message: "Data yang anda masukkan kosong"
                 });
             }
@@ -80,7 +80,7 @@ class CommentController {
             });
 
             if (oldComment === null) {
-                return res.status(400).json({
+                return res.status(404).json({
                     message: "Comment Tidak ditemukan"
                 });
             }
@@ -98,7 +98,7 @@ class CommentController {
             }
             );
 
-            return res.status(200).json({
+            return res.status(201).json({
                 comment: commentUpdate[1][0]
             });
         } catch (err) {
@@ -111,6 +111,13 @@ class CommentController {
         try {
             const user = req.user;
             const commentId = req.params.commentId;
+
+            if (!commentId) {
+                return res.status(404).json({
+                    message: "Invalid or missing comment ID",
+                    code: 404
+                });
+            }
             const commentInDb = await Comment.findOne({
                 where: {
                     id: commentId,
@@ -119,8 +126,10 @@ class CommentController {
             });
 
             if (commentInDb === null) {
-                return res.status(400).json({
-                    message: "Comment Tidak ditemukan"
+                return res.status(404).json({
+                    message: "Comment Tidak ditemukan",
+                    name: "Error",
+                    code: 404
                 });
             }
 

@@ -6,6 +6,7 @@ async function auth(req, res, next) {
         // token di header
         const token = req.headers.authorization;
         // token di cookies
+        console.log(token)
         // const token = req.cookies.Authorization;
         if (!token) {
             return res.status(401).json({ message: "Unauthorized" });
@@ -20,11 +21,12 @@ async function auth(req, res, next) {
     } catch (error) {
         if (error.name == 'JsonWebTokenError') {
             console.error("Error :", error.message);
-            return res.status(400).json("Token Tidak Valid");
+            return res.status(400).json({ message: error.message });
         }
         console.error("Error :", error.message);
         return res.status(500).json("Internal Server error");
     }
 }
+
 
 module.exports = auth;

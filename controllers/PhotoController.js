@@ -14,11 +14,14 @@ class PhotoController {
 
             // simpan data kedalam database
             const savePhoto = await Photo.create(photo);
-            res.status(200).json(savePhoto);
+            res.status(201).json(savePhoto);
             // tmapilkan response
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
-                return res.status(400).json({ message: err.errors[0].message });
+                return res.status(401).json({
+                    name: err.name,
+                    errors: err
+                });
             } else if (err.name === "SequelizeForeignKeyConstraintError") {
                 console.log(err.message);
                 return res.status(400).json({ message: "User id anda tidak ditemukan" });
@@ -53,13 +56,13 @@ class PhotoController {
                     }
 
                 }],
-               
+
 
             });
-            res.status(200).json((getPhoto));
+            res.status(200).json({ photos: getPhoto });
         } catch (err) {
             if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
-                return res.status(400).json({ message: err.errors[0].message });
+                return res.status(401).json({ message: err.errors[0].message });
             }
             console.log(err);
             return res.status(500).json({ message: "Internal Servel Error" });
@@ -73,8 +76,8 @@ class PhotoController {
             const newPhoto = req.body;
             const currentDate = new Date();
 
-            if (JSON.stringify(newPhoto) === "{}") {
-                return res.status(400).json({
+            if (!newPhoto.title || newPhoto.title.trim() === "") {
+                return res.status(401).json({
                     message: "Data yang anda masukkan kosong"
                 });
             }
@@ -87,7 +90,7 @@ class PhotoController {
             });
 
             if (oldPhoto === null) {
-                return res.status(400).json({
+                return res.status(404).json({
                     message: "Photo Tidak ditemukan"
                 });
             }
@@ -108,7 +111,7 @@ class PhotoController {
             );
 
             return res.status(200).json({
-                Photo: photoUpdate[1][0]
+                photo: photoUpdate[1][0]
             });
         } catch (err) {
             console.log(err);
@@ -128,8 +131,10 @@ class PhotoController {
                 }
             });
 
+
+
             if (photoInDb === null) {
-                return res.status(400).json({
+                return res.status(404).json({
                     message: "Photo Tidak ditemukan"
                 });
             }
@@ -159,11 +164,7 @@ class PhotoController {
                 message: "Your Photo has been successfully deleted"
             });
         } catch (err) {
-            if (err.code) {
-                return res.status(err.code).json({ message: err.message });
-            }
-            console.log(err);
-            return res.status(500).json({ message: "Internar server error" });
+            return res.status(404).json(err);
         }
     }
 }
