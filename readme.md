@@ -19,4 +19,4 @@ npm run test:singleSosialMedia #untuk menjalankan sosial media test file
 ```
 
 # Result Unit Test Integration
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/msibhacktiv8-kelompok7/Final-project2/blob/main/img/test_sukses.png)
